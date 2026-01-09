@@ -1,0 +1,46 @@
+services:
+  - type: web
+    name: love-story-blog
+    runtime: php
+    env: php
+    region: oregon
+    plan: free
+    buildCommand: "./render-build.sh"
+    startCommand: "php -S 0.0.0.0:$PORT -t public public/index.php"
+    envVars:
+      - key: APP_NAME
+        value: Love Story Blog
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: false
+      - key: APP_KEY
+        generateValue: true
+      - key: LOG_CHANNEL
+        value: stderr
+      - key: SESSION_DRIVER
+        value: file
+      - key: CACHE_DRIVER
+        value: file
+      - key: QUEUE_CONNECTION
+        value: sync
+      - key: DB_CONNECTION
+        value: mysql
+      - key: DB_HOST
+        sync: false
+      - key: DB_PORT
+        value: 3306
+      - key: DB_DATABASE
+        sync: false
+      - key: DB_USERNAME
+        sync: false
+      - key: DB_PASSWORD
+        sync: false
+      - key: MYSQL_ATTR_SSL_CA
+        value: /etc/ssl/certs/ca-certificates.crt
+    
+    healthCheckPath: /
+```
+
+
+
